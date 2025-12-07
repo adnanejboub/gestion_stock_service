@@ -14,4 +14,5 @@ public interface FournisseurRepository extends JpaRepository<Fournisseur, Long> 
     List<Fournisseur> findByVille(String ville);
     boolean existsByEmail(String email);
     boolean existsByNomEntreprise(String nomEntreprise);
+    List<Fournisseur> findByPays(String pays);
 }

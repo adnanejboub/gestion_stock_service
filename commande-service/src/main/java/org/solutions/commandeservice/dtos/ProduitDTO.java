@@ -1,60 +1,25 @@
-package org.solutions.produitservice.entities;
+package org.solutions.commandeservice.dtos;
 
-import jakarta.persistence.*;
-import org.solutions.produitservice.dtos.FournisseurDTO;
-import org.solutions.produitservice.dtos.StockDTO;
 
-@Entity
-@Table(name = "produits")
-public class Produit {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProduitDTO {
     private Long id;
-
-    @Column(nullable = false, unique = true, length = 50)
     private String reference;
-
-    @Column(nullable = false, length = 200)
     private String nom;
-
-    @Column(nullable = false)
     private double prix;
-
-    @Column(length = 100)
     private String categorie;
-
-    @Column(length = 50)
     private String marque;
-
-    @Column(nullable = false)
     private Integer stockMinimum;
-
-    // ID du fournisseur (pas de relation JPA)
-    @Column(name = "fournisseur_id", nullable = false)
     private Long fournisseurId;
 
-    // Champs @Transient pour données récupérées via Feign
-    @Transient
-    private FournisseurDTO fournisseur;
-
-    @Transient
-    private StockDTO stock;
-
     // Constructeurs
-    public Produit() {
+    public ProduitDTO() {
     }
 
-    public Produit(Long id, String reference, String nom, double prix, String categorie,
-                   String marque, Integer stockMinimum, Long fournisseurId) {
+    public ProduitDTO(Long id, String reference, String nom, double prix) {
         this.id = id;
         this.reference = reference;
         this.nom = nom;
         this.prix = prix;
-        this.categorie = categorie;
-        this.marque = marque;
-        this.stockMinimum = stockMinimum;
-        this.fournisseurId = fournisseurId;
     }
 
     // Getters et Setters
@@ -120,21 +85,5 @@ public class Produit {
 
     public void setFournisseurId(Long fournisseurId) {
         this.fournisseurId = fournisseurId;
-    }
-
-    public FournisseurDTO getFournisseur() {
-        return fournisseur;
-    }
-
-    public void setFournisseur(FournisseurDTO fournisseur) {
-        this.fournisseur = fournisseur;
-    }
-
-    public StockDTO getStock() {
-        return stock;
-    }
-
-    public void setStock(StockDTO stock) {
-        this.stock = stock;
     }
 }

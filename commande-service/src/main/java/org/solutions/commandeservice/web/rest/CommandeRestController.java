@@ -1,7 +1,7 @@
 package org.solutions.commandeservice.web.rest;
 
 import org.solutions.commandeservice.entities.Commande;
-import org.solutions.commandeservice.services.CommandeServiceImp;
+import org.solutions.commandeservice.services.CommandeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CommandeRestController {
     
     @Autowired
-    private CommandeServiceImp commandeService;
+    private CommandeServiceImpl commandeService;
 
     @GetMapping
     public ResponseEntity<List<Commande>> getAllCommandes() {
@@ -36,7 +36,7 @@ public class CommandeRestController {
 
     @GetMapping("/client/{clientId}")
     public ResponseEntity<List<Commande>> getCommandesByClientId(@PathVariable Long clientId) {
-        List<Commande> commandes = commandeService.findByClient_Id(clientId);
+        List<Commande> commandes = commandeService.findByClientId(clientId);
         return ResponseEntity.ok(commandes);
     }
 
@@ -62,7 +62,7 @@ public class CommandeRestController {
 
     @GetMapping("/client/{clientId}/total")
     public ResponseEntity<Double> getTotalCommandesByClientId(@PathVariable Long clientId) {
-        Double total = commandeService.getTotalCommandesByClientId(clientId);
+        Double total = commandeService.calculateTotalByClientId(clientId);
         return ResponseEntity.ok(total);
     }
 

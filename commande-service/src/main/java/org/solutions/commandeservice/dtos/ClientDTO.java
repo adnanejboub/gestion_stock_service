@@ -1,58 +1,23 @@
-package org.solutions.clientservice.entities;
+package org.solutions.commandeservice.dtos;
 
-import jakarta.persistence.*;
-import org.solutions.clientservice.dtos.CommandeDTO;
-import java.util.List;
 
-@Entity
-@Table(name = "clients")
-public class Client {
+public class ClientDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, length = 100)
     private String nom;
-
-    @Column(nullable = false, length = 100)
     private String prenom;
-
-    @Column(unique = true, nullable = false, length = 150)
     private String email;
-
-    @Column(length = 20)
     private String telephone;
-
-    @Column(length = 255)
     private String adresse;
-
-    @Column(length = 100)
     private String ville;
-
-    @Column(length = 100)
     private String pays;
+    private Boolean actif;
 
-    @Column(nullable = false)
-    private Boolean actif = true;
-
-    // SUPPRIMÉ: @OneToMany avec Commande
-    // Les commandes seront récupérées via Feign
-    @Transient
-    private List<CommandeDTO> commandes;
-
-    @Transient
-    private Integer nombreCommandes;
-
-    @Transient
-    private Double totalDepense;
-
-    public Client() {
-        this.actif = true;
+    public ClientDTO() {
     }
 
-    public Client(Long id, String nom, String prenom, String email, String telephone,
-                  String adresse, String ville, String pays, Boolean actif) {
+    public ClientDTO(Long id, String nom, String prenom, String email, String telephone,
+                     String adresse, String ville, String pays, Boolean actif) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -64,6 +29,7 @@ public class Client {
         this.actif = actif;
     }
 
+    // Getters et Setters
     public Long getId() {
         return id;
     }
@@ -134,29 +100,5 @@ public class Client {
 
     public void setActif(Boolean actif) {
         this.actif = actif;
-    }
-
-    public List<CommandeDTO> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<CommandeDTO> commandes) {
-        this.commandes = commandes;
-    }
-
-    public Integer getNombreCommandes() {
-        return nombreCommandes;
-    }
-
-    public void setNombreCommandes(Integer nombreCommandes) {
-        this.nombreCommandes = nombreCommandes;
-    }
-
-    public Double getTotalDepense() {
-        return totalDepense;
-    }
-
-    public void setTotalDepense(Double totalDepense) {
-        this.totalDepense = totalDepense;
     }
 }

@@ -1,7 +1,7 @@
 package org.solutions.produitservice.web.rest;
 
 import org.solutions.produitservice.entities.Produit;
-import org.solutions.produitservice.services.ProduitServiceImp;
+import org.solutions.produitservice.services.ProduitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 public class ProduitRestController {
     
     @Autowired
-    private ProduitServiceImp produitService;
+    private ProduitServiceImpl produitService;
 
     @GetMapping
     public ResponseEntity<List<Produit>> getAllProduits() {
@@ -56,7 +56,7 @@ public class ProduitRestController {
 
     @GetMapping("/fournisseur/{fournisseurId}")
     public ResponseEntity<List<Produit>> getProduitsByFournisseur(@PathVariable Long fournisseurId) {
-        List<Produit> produits = produitService.findByFournisseur_Id(fournisseurId);
+        List<Produit> produits = produitService.findByFournisseurId(fournisseurId);
         return ResponseEntity.ok(produits);
     }
 

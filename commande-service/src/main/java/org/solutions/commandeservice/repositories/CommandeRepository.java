@@ -9,8 +9,11 @@ import java.util.List;
 
 @Repository
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
-    List<Commande> findByClient_Id(Long clientId);
     List<Commande> findByStatut(String statut);
     List<Commande> findByDateCommandeBetween(LocalDateTime startDate, LocalDateTime endDate);
     List<Commande> findByStatutPaiement(String statutPaiement);
+    List<Commande> findByClientId(Long clientId);
+    @org.springframework.data.jpa.repository.Query("SELECT SUM(c.montantTotal) FROM Commande c WHERE c.clientId = :clientId")
+    Double sumMontantTotalByClientId(Long clientId);
+    Integer countByClientId(Long clientId);
 }

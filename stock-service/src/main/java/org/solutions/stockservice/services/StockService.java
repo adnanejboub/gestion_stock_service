@@ -9,10 +9,18 @@ import java.util.List;
 public interface StockService {
     List<Stock> findAll();
     Stock findById(Long id);
-    Stock findByProduit_Id(Long produitId);
     Stock create(Stock stock);
     Stock update(Long id, Stock stockDetails);
     void delete(Long id);
-    Stock updateQuantiteDisponible(Long id, Integer quantite);
-    Stock updateQuantiteReservee(Long id, Integer quantite);
+    List<Stock> findByEmplacement(String emplacement);
+    List<Stock> findStocksFaibles(Integer seuil);
+    List<Stock> findStocksEpuises();
+    // Méthodes de gestion du stock
+    Stock ajouterStock(Long produitId, Integer quantite);
+    Stock retirerStock(Long produitId, Integer quantite);
+    Stock reserverStock(Long produitId, Integer quantite);
+    Stock libererReservation(Long produitId, Integer quantite);
+    // Méthode avec Feign
+    Stock getStockWithProduit(Long stockId);
+    Stock findByProduitId(Long produitId);
 }

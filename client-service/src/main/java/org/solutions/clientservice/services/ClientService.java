@@ -1,5 +1,6 @@
 package org.solutions.clientservice.services;
 
+import org.solutions.clientservice.dtos.CommandeDTO;
 import org.solutions.clientservice.entities.Client;
 import org.solutions.commandeservice.entities.Commande;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,11 @@ public interface ClientService {
     List<Client> findActifs();
 
 
+    Client getClientWithCommandes(Long clientId);
 
+    List<CommandeDTO> getCommandesByClient(Long clientId);
+
+    Double getTotalDepense(Long clientId);
+
+    Integer countCommandesByClient(Long clientId);
 }

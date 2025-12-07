@@ -12,6 +12,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     Optional<Produit> findByReference(String reference);
     List<Produit> findByCategorie(String categorie);
     List<Produit> findByMarque(String marque);
-    List<Produit> findByFournisseur_Id(Long fournisseurId);
+    List<Produit> findByFournisseurId(Long fournisseurId);
     boolean existsByReference(String reference);
+    List<Produit> findByPrixBetween(Double minPrix, Double maxPrix);
 }
