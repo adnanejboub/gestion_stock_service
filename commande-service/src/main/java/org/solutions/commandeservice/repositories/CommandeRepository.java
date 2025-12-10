@@ -2,6 +2,7 @@ package org.solutions.commandeservice.repositories;
 
 import org.solutions.commandeservice.entities.Commande;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
     List<Commande> findByDateCommandeBetween(LocalDateTime startDate, LocalDateTime endDate);
     List<Commande> findByStatutPaiement(String statutPaiement);
     List<Commande> findByClientId(Long clientId);
-    @org.springframework.data.jpa.repository.Query("SELECT SUM(c.montantTotal) FROM Commande c WHERE c.clientId = :clientId")
+    @Query("SELECT SUM(c.montantTotal) FROM Commande c WHERE c.clientId = :clientId")
     Double sumMontantTotalByClientId(Long clientId);
     Integer countByClientId(Long clientId);
 }
