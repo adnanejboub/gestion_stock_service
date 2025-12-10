@@ -1,0 +1,54 @@
+type Query{
+    FournisseurList: [Fournisseur]
+    FournisseurById(id: ID): Fournisseur
+    FournisseurByEmail(email: String): Fournisseur
+    FournisseurByNomEntreprise(nomEntreprise: String): Fournisseur
+    FournisseursByVille(ville: String): [Fournisseur]
+    FournisseursByPays(pays: String): [Fournisseur]
+    FournisseurWithProduits(id: ID): Fournisseur
+    ProduitsByFournisseur(id: ID): [Produit]
+    CountProduitsByFournisseur(id: ID): Int
+}
+
+type Mutation{
+    createFournisseur(fournisseur: RequestFournisseur): Fournisseur
+    updateFournisseur(id: ID, fournisseur: RequestFournisseur): Fournisseur
+    deleteFournisseur(id: ID): Boolean
+}
+
+input RequestFournisseur{
+    nomEntreprise: String
+    nomContact: String
+    prenomContact: String
+    email: String
+    telephone: String
+    adresse: String
+    ville: String
+    pays: String
+}
+
+type Fournisseur{
+    id: ID
+    nomEntreprise: String
+    nomContact: String
+    prenomContact: String
+    email: String
+    telephone: String
+    adresse: String
+    ville: String
+    pays: String
+    produits: [Produit]
+    nombreProduits: Int
+}
+
+type Produit{
+    id: ID
+    reference: String
+    nom: String
+    prix: Float
+    categorie: String
+    marque: String
+    stockMinimum: Int
+    fournisseurId: ID
+}
+

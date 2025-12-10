@@ -1,0 +1,68 @@
+
+type Query{
+    ProduitList : [Produit]
+    ProduitsByFournisseur(fournisseurId :ID):[Produit]
+    StockByProduitId(produitId: ID): Stock
+    ProduitById(id: ID):Produit
+    ProduitByReference(reference: String):Produit
+    ProduitsByCategorie(categorie: String):[Produit]
+    ProduitsByMarque(marque: String):[Produit]
+    ProduitWithDetails(produitId: ID): Produit
+    LignesCommandeByProduit(produitId: ID): [LigneCommande]
+    CountCommandesByProduit(produitId: ID): Int
+}
+type Mutation{
+    createProduit(prod: RequestProduit):Produit
+    updateProduit(id: ID, prod: RequestProduit):Produit
+    deleteProduit(id: ID):Boolean
+}
+input RequestProduit{
+    reference:String,
+    nom:String,
+    prix:Float,
+    categorie:String,
+    marque:String,
+    stockMinimum:Int,
+    fournisseurId:Int
+
+}
+
+type Produit{
+    id:Int,
+    reference:String,
+    nom:String,
+    prix:Float,
+    categorie:String,
+    marque:String,
+    stockMinimum:Int,
+    fournisseurId:Int,
+    stock:Stock,
+    fournisseur:Fournisseur
+}
+type Stock{
+    id:ID
+    produitId:ID
+    quantiteDisponible:Int
+    quantiteReservee:Int
+    quantiteEnCommande:Int
+    emplacement:String
+}
+type LigneCommande{
+    id:ID
+    commandeId:ID
+    produitId:ID
+    quantite:Int
+    prixUnitaire:Float
+    montantLigne:Float
+}
+type Fournisseur{
+    id:ID,
+    nomEntreprise:String
+    nomContact:String
+    prenomContact:String
+    email:String
+    telephone:Int
+    adresse:String
+    ville:String
+    pays:String
+}

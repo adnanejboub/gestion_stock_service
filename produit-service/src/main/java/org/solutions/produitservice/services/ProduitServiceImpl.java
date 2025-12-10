@@ -187,4 +187,13 @@ public class ProduitServiceImpl implements ProduitService {
             return 0;
         }
     }
+
+    @Override
+    public StockDTO getStockByProduitId(Long produitId) {
+        try {
+            return stockFeignClient.getStockByProduitId(produitId);
+        } catch (Exception e) {
+            throw new RuntimeException("Impossible de récupérer le stock pour le produit " + produitId, e);
+        }
+    }
 }

@@ -5,6 +5,7 @@ spring:
   application:
     name: produit-service
 
+
   datasource:
     url: jdbc:mysql://localhost:3306/db_produits?createDatabaseIfNotExist=true
     username: root

@@ -1,0 +1,49 @@
+type Query{
+    StockList: [Stock]
+    StockById(id: ID): Stock
+    StockByProduitId(produitId: ID): Stock
+    StockWithProduit(id: ID): Stock
+    StocksByEmplacement(emplacement: String): [Stock]
+    StocksFaibles(seuil: Int): [Stock]
+    StocksEpuises: [Stock]
+}
+
+type Mutation{
+    createStock(stock: RequestStock): Stock
+    updateStock(id: ID, stock: RequestStock): Stock
+    deleteStock(id: ID): Boolean
+    ajouterStock(produitId: ID, quantite: Int): Stock
+    retirerStock(produitId: ID, quantite: Int): Stock
+    reserverStock(produitId: ID, quantite: Int): Stock
+    libererReservation(produitId: ID, quantite: Int): Stock
+}
+
+input RequestStock{
+    produitId: ID
+    quantiteDisponible: Int
+    quantiteReservee: Int
+    quantiteEnCommande: Int
+    emplacement: String
+}
+
+type Stock{
+    id: ID
+    produitId: ID
+    quantiteDisponible: Int
+    quantiteReservee: Int
+    quantiteEnCommande: Int
+    emplacement: String
+    produit: Produit
+}
+
+type Produit{
+    id: ID
+    reference: String
+    nom: String
+    prix: Float
+    categorie: String
+    marque: String
+    stockMinimum: Int
+    fournisseurId: ID
+}
+

@@ -2,6 +2,7 @@ package org.solutions.produitservice.services;
 
 import org.solutions.produitservice.dtos.LigneCommandeDTO;
 import org.solutions.produitservice.entities.Produit;
+import org.solutions.produitservice.dtos.StockDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface ProduitService {
     Produit getProduitWithDetails(Long produitId);
     List<LigneCommandeDTO> getLignesCommandeByProduit(Long produitId);
     Integer countCommandesByProduit(Long produitId);
+    StockDTO getStockByProduitId(Long produitId);
 }
